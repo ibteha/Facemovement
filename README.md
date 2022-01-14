@@ -8,8 +8,7 @@ The videos on the left show the driving videos. The first row on the right for e
 
 ### VoxCeleb Dataset
 ![Screenshot](sup-mat/vox-teaser.gif)
-### Fashion Dataset
-![Screenshot](sup-mat/fashion-teaser.gif)
+
 ### MGIF Dataset
 ![Screenshot](sup-mat/mgif-teaser.gif)
 
@@ -43,43 +42,9 @@ cd face-alignment
 pip install -r requirements.txt
 python setup.py install
 ```
-
-### Animation demo with Docker
-
-If you are having trouble getting the demo to work because of library compatibility issues,
-and you're running Linux, you might try running it inside a Docker container, which would
-give you better control over the execution environment.
-
-Requirements: Docker 19.03+ and [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
-installed and able to successfully run the `nvidia-docker` usage tests.
-
-We'll first build the container.
-
-```
-docker build -t first-order-model .
-```
-
-And now that we have the container available locally, we can use it to run the demo.
-
-```
-docker run -it --rm --gpus all \
-       -v $HOME/first-order-model:/app first-order-model \
-       python3 demo.py --config config/vox-256.yaml \
-           --driving_video driving.mp4 \
-           --source_image source.png  \ 
-           --checkpoint vox-cpk.pth.tar \ 
-           --result_video result.mp4 \
-           --relative --adapt_scale
-```
-
 ### Colab Demo 
-We prepare a special demo for the google-colab, see: ```demo-colab.ipynb```.
-
-### Face-swap
-It is possible to modify the method to perform face-swap using supervised segmentation masks.
-![Screenshot](sup-mat/face-swap.gif)
-For both unsupervised and supervised video editing, such as face-swap, please refer to [Motion Co-Segmentation](https://github.com/AliaksandrSiarohin/motion-cosegmentation).
-
+1) Colab you can use it "first_motion.ipynb"
+2) Colab for show interfernce result "first_order.ipynb"
 
 ### Training
 
@@ -158,16 +123,4 @@ We recommend the later, for each video make a separate folder with all the frame
 
 3) Create a config ```config/dataset_name.yaml```, in dataset_params specify the root dir the ```root_dir:  data/dataset_name```. Also adjust the number of epoch in train_params.
 
-#### Additional notes
 
-Citation:
-
-```
-@InProceedings{Siarohin_2019_NeurIPS,
-  author={Siarohin, Aliaksandr and Lathuilière, Stéphane and Tulyakov, Sergey and Ricci, Elisa and Sebe, Nicu},
-  title={First Order Motion Model for Image Animation},
-  booktitle = {Conference on Neural Information Processing Systems (NeurIPS)},
-  month = {December},
-  year = {2019}
-}
-```
